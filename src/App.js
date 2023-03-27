@@ -1,5 +1,7 @@
-function App() {
-  return;
-}
+import { Header } from "./components";
 
-export default App;
+export const App = () => {
+  return (
+    <Header />
+  );
+}
