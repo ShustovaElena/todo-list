@@ -1,7 +1,10 @@
-import { Header } from "./components";
+import { Header, Tasks } from "./components";
 
 export const App = () => {
   return (
-    <Header />
+    <>
+      <Header />
+      <Tasks />
+    </>
   );
 }
