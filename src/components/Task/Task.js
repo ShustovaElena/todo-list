@@ -13,7 +13,7 @@ export class Task extends Component {
     const { title, description } = this.props;
 
     return (
-      <Card sx={{ maxWidth: 475, margin: '20px', minHeight: 100 }}>
+      <Card sx={{ maxWidth: 500, margin: '20px', minHeight: 100 }}>
       <CardContent sx={{ padding: '10px', display: 'flex' }}>
         <Checkbox defaultChecked />
         <Container>
