@@ -4,10 +4,12 @@ import { Container } from '@mui/material';
 
 export class Tasks extends Component {
   render() {
+    const { tasks } = this.props;
     return (
       <Container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '50%' }}>
-        <Task title="Пойти на работу" description="Мне нужно сходить на работу и я должна сделать там много задач" />
-        <Task title="Пойти на работу" />
+        {tasks.map((task, index) => {
+          return <Task key={index} title={task.title} description={task.description} />
+        })}
       </Container>
     );
   }
