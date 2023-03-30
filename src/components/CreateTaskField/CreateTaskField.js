@@ -13,6 +13,12 @@ export class CreateTaskField extends Component {
   }
 
   handleTitleChange = (event) => {
+    if (event.target.value.length < 3) {
+      this.setState({ error: true });
+    } else {
+    this.setState({ error: false });
+    }
+
     this.setState({ title: event.target.value });
   }
 
@@ -27,29 +33,27 @@ export class CreateTaskField extends Component {
   handleSubmit = (event) => {
     const { title, description, status } = this.state;
     const { addTask } = this.props;
+    const id = "id" + Math.random().toString(16).slice(2);
 
-    if (this.state.title.length < 3) {
-      this.setState({ error: true });
-    } else {
-    this.setState({ error: false });
-    }
+    addTask({id, title, description, status});
 
-    addTask({title, description, status});
-    document.getElementById("form").reset();
+    this.setState({ title: '', description: '' });
+
     event.preventDefault();
   }
 
   render() {
-    const { error } = this.state; 
+    const { title, description, error } = this.state; 
 
     return (
-      <Box id="form" component="form" sx={{ display: 'flex', margin: '20px auto', justifyContent: 'center' }}>
+      <Box id="form" component="form" onSubmit={this.handleSubmit} sx={{ display: 'flex', margin: '20px auto', justifyContent: 'center' }}>
         <TextField 
           id="title" 
           label="title" 
           variant="outlined" 
           required
           error={error}
+          value={title}
           helperText={error && 'Title must be more 2 letters'}
           onChange={this.handleTitleChange} 
           sx={{ margin: '5px', width: '30%' }} 
@@ -58,10 +62,11 @@ export class CreateTaskField extends Component {
           id="description" 
           label="description" 
           variant="outlined" 
+          value={description}
           onChange={this.handleDescriptionChange}  
           sx={{ margin: '5px', width: '30%' }} 
         />
-        <Button variant="contained"  onClick={this.handleSubmit} sx={{ margin: '5px', height: '55px', width: '15%' }}>Create task</Button>
+        <Button type="submit" variant="contained" sx={{ margin: '5px', height: '55px', width: '15%' }}>Create task</Button>
       </Box>
     );
   }
