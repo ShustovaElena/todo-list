@@ -32,6 +32,7 @@ export class Tasks extends Component {
   };
 
   editTask = (userInput) => {
+    console.log(userInput);
     if (userInput) {
       this.setState((state) => {
         return {tasks: state.tasks.map(task => task.id !== userInput.id ? task : userInput)};

@@ -31,11 +31,13 @@ export class CreateTaskField extends Component {
   }
 
   handleSubmit = (event) => {
-    const { title, description, status } = this.state;
+    const { title, description, status, error } = this.state;
     const { addTask } = this.props;
     const id = "id" + Math.random().toString(16).slice(2);
 
-    addTask({id, title, description, status});
+    if (!error) {
+      addTask({id, title, description, status});
+    }
 
     this.setState({ title: '', description: '' });
 

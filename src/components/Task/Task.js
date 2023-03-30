@@ -12,12 +12,13 @@ export class Task extends Component {
       isChangeTask: false,
       title: this.props.title,
       description: this.props.description,
+      status: this.props.status,
+      isDone: this.props.status === 'active' ? false : true,
       isError: false
     }
   }
 
   handleChangeTitle = (event) => {
-    console.log(event.target.value);
     if (event.target.value.length < 3) {
       this.setState((state) => {
         return { isError: true };
@@ -36,27 +37,52 @@ export class Task extends Component {
 
   handleEditTask = () => {
     const { id, editTask, status } = this.props;
-    const { title, description } = this.state;
+    const { title, description, isError } = this.state;
 
-    if (!this.state.isChangeTask) {
-      this.setState((state) => {
-        return {isChangeTask: true};
-      });
-    } else {
-      this.setState((state) => {
-        return {isChangeTask: false};
-      });
+    if (!isError) {
+      if (!this.state.isChangeTask) {
+        this.setState((state) => {
+          return {isChangeTask: true};
+        });
+      } else {
+        this.setState((state) => {
+          return {isChangeTask: false};
+        });
+      }
+  
+      editTask({id, title, description, status});
     }
+  }
+
+  handleChangeStatus = () => {
+    const { id, editTask } = this.props;
+    const { title, description, isDone, status } = this.state;
+
+    this.setState((state) => {
+    return { 
+      status: state.status === 'active' ? 'done' : 'active', 
+      isDone: !state.isDone 
+    }});
+
+    console.log(status, isDone);
     editTask({id, title, description, status});
   }
 
+  // componentDidUpdate(prevState) {
+  //   const { id, editTask } = this.props;
+  //   const { title, description, isDone, status } = this.state;
+  //   if (prevState.status !== status) {
+  //   editTask({id, title, description, status});
+  //   }
+  // }
+
   render() {
-    const { isChangeTask, title, description, isError } = this.state;
+    const { isChangeTask, title, description, isError, isDone } = this.state;
 
     return (
       <Card sx={{ maxWidth: 500, margin: '20px', minHeight: 100 }}>
       <CardContent sx={{ padding: '10px', display: 'flex' }}>
-        <Checkbox />
+        <Checkbox onChange={this.handleChangeStatus} checked={isDone} />
         <Container>
           {isChangeTask ? 
           <TextField 
