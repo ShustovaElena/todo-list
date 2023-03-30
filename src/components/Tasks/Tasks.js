@@ -32,12 +32,17 @@ export class Tasks extends Component {
   };
 
   editTask = (userInput) => {
-    console.log(userInput);
     if (userInput) {
       this.setState((state) => {
         return {tasks: state.tasks.map(task => task.id !== userInput.id ? task : userInput)};
       });
     }
+  };
+
+  deleteTask = (id) => {
+    this.setState((state) => {
+      return {tasks: state.tasks.filter(task => task.id !== id)};
+    });
   };
 
   render() {
@@ -48,7 +53,7 @@ export class Tasks extends Component {
         <Tabs />
         <Container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '50%' }}>
           {tasks && tasks.map((task) => {
-            return <Task key={task.id} {...task} editTask={this.editTask} />
+            return <Task key={task.id} {...task} editTask={this.editTask} deleteTask={this.deleteTask} />
           })}
         </Container>
       </>

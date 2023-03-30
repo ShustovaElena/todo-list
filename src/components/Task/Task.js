@@ -76,6 +76,11 @@ export class Task extends Component {
   //   }
   // }
 
+  handleDeleteTask = () => {
+    const { deleteTask, id } = this.props;
+    deleteTask(id);
+  }
+
   render() {
     const { isChangeTask, title, description, isError, isDone } = this.state;
 
@@ -109,7 +114,7 @@ export class Task extends Component {
         <IconButton color="primary" aria-label="edit" onClick={this.handleEditTask}>
           {isChangeTask ? <DoneIcon /> : <EditIcon />}
         </IconButton>
-        <IconButton aria-label="delete">
+        <IconButton aria-label="delete" onClick={this.handleDeleteTask}>
           <DeleteIcon />
         </IconButton>
         <IconButton aria-label="archive">
