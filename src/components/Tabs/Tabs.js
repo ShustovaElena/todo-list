@@ -6,7 +6,7 @@ export class Tabs extends Component {
     const { showFiltredTasks } = this.props;
 
     return (
-      <ButtonGroup variant="text" aria-label="text button group" sx={{ display: 'flex', justifyContent: 'center' }}>
+      <ButtonGroup variant="text" sx={{ display: 'flex', justifyContent: 'center' }}>
         <Button onClick={() => showFiltredTasks('all')}>All</Button>
         <Button onClick={() => showFiltredTasks('active')}>Active</Button>
         <Button onClick={() => showFiltredTasks('done')}>Done</Button>

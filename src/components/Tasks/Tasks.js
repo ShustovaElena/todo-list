@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Task, CreateTaskField, Tabs } from "../../components";
-import { Container } from '@mui/material';
+import { Container, Box } from '@mui/material';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export class Tasks extends Component {
   constructor() {
@@ -71,8 +72,10 @@ export class Tasks extends Component {
 
   render() {
     const { filteredTasks } = this.state;
+    let theme = this.context;
+
     return (
-      <>
+      <Box sx={{ backgroundColor: theme.background, backgroundSize: '100%', minHeight: '100vh'}}>
         <CreateTaskField addTask={this.addTask}/>
         <Tabs showFiltredTasks={this.showFiltredTasks} />
         <Container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '50%' }}>
@@ -80,7 +83,9 @@ export class Tasks extends Component {
             return <Task key={task.id} {...task} editTask={this.editTask} deleteTask={this.deleteTask} />
           })}
         </Container>
-      </>
+      </Box>
     );
   }
 }
+
+Tasks.contextType = ThemeContext;

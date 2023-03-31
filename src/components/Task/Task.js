@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import DoneIcon from '@mui/icons-material/Done';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export class Task extends Component {
   constructor(props) {
@@ -99,9 +100,10 @@ export class Task extends Component {
 
   render() {
     const { isChangeTask, title, description, isError, isDone, isArchive, borderStyle } = this.state;
+    let theme = this.context;
 
     return (
-      <Card style={{ border: borderStyle }} sx={{ maxWidth: 500, margin: '20px', minHeight: 100}}>
+      <Card style={{ border: borderStyle }} sx={{ maxWidth: 500, margin: '20px', minHeight: 100, backgroundColor: theme.backgroundTask, color: theme.colorTask}}>
       <CardContent sx={{ padding: '10px', display: 'flex' }}>
         <Checkbox onChange={this.handleChangeStatus} checked={isDone} />
         <Container>
@@ -130,7 +132,7 @@ export class Task extends Component {
         <IconButton color="primary" aria-label="edit" onClick={this.handleEditTask}>
           {isChangeTask ? <DoneIcon /> : <EditIcon />}
         </IconButton>
-        <IconButton aria-label="delete" onClick={this.handleDeleteTask}>
+        <IconButton color="primary" aria-label="delete" onClick={this.handleDeleteTask}>
           <DeleteIcon />
         </IconButton>
         <IconButton aria-label="archive" onClick={this.handleArchiveTask}>
@@ -141,3 +143,5 @@ export class Task extends Component {
     );
   }
 }
+
+Task.contextType = ThemeContext;
