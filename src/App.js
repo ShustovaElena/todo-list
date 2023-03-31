@@ -1,12 +1,13 @@
-import { Header, Tasks, CreateTaskField, Tabs } from "./components";
+import { Component } from "react";
+import { Header, Tasks } from "./components";
 
-export const App = () => {
-  return (
-    <>
-      <Header />
-      <CreateTaskField />
-      <Tabs />
-      <Tasks />
-    </>
-  );
+export class App extends Component {
+  render() {
+    return (
+      <>
+        <Header />
+        <Tasks />
+      </>
+    );
+  }
 }
