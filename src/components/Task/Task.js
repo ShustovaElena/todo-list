@@ -6,6 +6,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import DoneIcon from '@mui/icons-material/Done';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { ThemeContext } from '../../context/ThemeContext';
+import PropTypes from 'prop-types';
 
 export class Task extends Component {
   constructor(props) {
@@ -145,3 +146,14 @@ export class Task extends Component {
 }
 
 Task.contextType = ThemeContext;
+
+Task.propTypes = {
+  optionalObjectWithShape: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    status: PropTypes.string,
+  }),
+  editTask: PropTypes.func,
+  deleteTask: PropTypes.func,
+}

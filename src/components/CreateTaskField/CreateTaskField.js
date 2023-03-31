@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { TextField, Box, Button } from "@mui/material";
 import { ThemeContext } from '../../context/ThemeContext';
+import PropTypes from 'prop-types';
 
 export class CreateTaskField extends Component {
   constructor(props) {
@@ -77,3 +78,7 @@ export class CreateTaskField extends Component {
 }
 
 CreateTaskField.contextType = ThemeContext;
+
+CreateTaskField.propTypes = {
+  addTask: PropTypes.func
+}
