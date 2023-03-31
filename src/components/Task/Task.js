@@ -4,6 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import DoneIcon from '@mui/icons-material/Done';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 export class Task extends Component {
   constructor(props) {
@@ -14,7 +15,9 @@ export class Task extends Component {
       description: this.props.description,
       status: this.props.status,
       isDone: this.props.status === 'active' ? false : true,
-      isError: false
+      isArchive: false,
+      isError: false,
+      borderStyle: this.props.status === 'done' ? '2px solid var(--main-color)' : 'none'
     }
   }
 
@@ -55,37 +58,48 @@ export class Task extends Component {
   }
 
   handleChangeStatus = () => {
-    const { id, editTask } = this.props;
-    const { title, description, isDone, status } = this.state;
+    const { isDone } = this.state;
 
     this.setState((state) => {
     return { 
       status: state.status === 'active' ? 'done' : 'active', 
-      isDone: !state.isDone 
+      isDone: !state.isDone,
+      borderStyle: isDone ? '2px solid var(--main-color)' : 'none'
     }});
-
-    console.log(status, isDone);
-    editTask({id, title, description, status});
   }
 
-  // componentDidUpdate(prevState) {
-  //   const { id, editTask } = this.props;
-  //   const { title, description, isDone, status } = this.state;
-  //   if (prevState.status !== status) {
-  //   editTask({id, title, description, status});
-  //   }
-  // }
+  componentDidUpdate(prevState) {
+    const { id, editTask } = this.props;
+    const { title, description, isDone, status } = this.state;
+    if (prevState.status !== status) {
+      this.setState({borderStyle: isDone ? '2px solid var(--main-color)' : 'none'});
+      editTask({id, title, description, status});
+    }
+  }
 
   handleDeleteTask = () => {
     const { deleteTask, id } = this.props;
     deleteTask(id);
   }
 
+  handleArchiveTask = () => {
+    const { status } = this.state;
+
+    if (status !== 'done') {
+      this.setState((state) => {
+        return { 
+          status: state.status === 'active' ? 'archive' : 'active',
+          isArchive: !state.isArchive
+        }
+      });
+    }
+  }
+
   render() {
-    const { isChangeTask, title, description, isError, isDone } = this.state;
+    const { isChangeTask, title, description, isError, isDone, isArchive, borderStyle } = this.state;
 
     return (
-      <Card sx={{ maxWidth: 500, margin: '20px', minHeight: 100 }}>
+      <Card style={{ border: borderStyle }} sx={{ maxWidth: 500, margin: '20px', minHeight: 100}}>
       <CardContent sx={{ padding: '10px', display: 'flex' }}>
         <Checkbox onChange={this.handleChangeStatus} checked={isDone} />
         <Container>
@@ -117,8 +131,8 @@ export class Task extends Component {
         <IconButton aria-label="delete" onClick={this.handleDeleteTask}>
           <DeleteIcon />
         </IconButton>
-        <IconButton aria-label="archive">
-          <BookmarkBorderIcon />
+        <IconButton aria-label="archive" onClick={this.handleArchiveTask}>
+          {isArchive ? <BookmarkIcon color="primary"/> : <BookmarkBorderIcon color={isDone ? "disabled" : "primary"}/>}
         </IconButton>
       </CardActions>
     </Card>
