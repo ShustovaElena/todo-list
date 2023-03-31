@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { ButtonGroup, Button } from '@mui/material';
+import PropTypes from 'prop-types';
 
 export class Tabs extends Component {
   render() {
@@ -14,4 +15,8 @@ export class Tabs extends Component {
       </ButtonGroup>
     );
   }
+}
+
+Tabs.propTypes = {
+  showFiltredTasks: PropTypes.func
 }

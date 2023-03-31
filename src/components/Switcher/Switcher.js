@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Switch, Box }  from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import PropTypes from 'prop-types';
 
 export class Switcher extends Component {
   render() {
@@ -15,4 +16,8 @@ export class Switcher extends Component {
       </Box>
     );
   }
+}
+
+Switcher.propTypes = {
+  changeTheme: PropTypes.func
 }
