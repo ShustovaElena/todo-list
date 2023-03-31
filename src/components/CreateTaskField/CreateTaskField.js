@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { TextField, Box, Button } from "@mui/material";
+import { ThemeContext } from '../../context/ThemeContext';
 
 export class CreateTaskField extends Component {
   constructor(props) {
@@ -46,9 +47,10 @@ export class CreateTaskField extends Component {
 
   render() {
     const { title, description, error } = this.state; 
+    let theme = this.context;
 
     return (
-      <Box id="form" component="form" onSubmit={this.handleSubmit} sx={{ display: 'flex', margin: '20px auto', justifyContent: 'center' }}>
+      <Box id="form" component="form" onSubmit={this.handleSubmit} sx={{ display: 'flex', paddingTop: 2, margin: '0 auto 20px auto', justifyContent: 'center' }}>
         <TextField 
           id="title" 
           label="title" 
@@ -68,8 +70,10 @@ export class CreateTaskField extends Component {
           onChange={this.handleDescriptionChange}  
           sx={{ margin: '5px', width: '30%' }} 
         />
-        <Button type="submit" variant="contained" sx={{ margin: '5px', height: '55px', width: '15%' }}>Create task</Button>
+        <Button type="submit" variant="contained" sx={{ margin: '5px', height: '55px', width: '15%', backgroundColor: theme.backgroundHeader, color: theme.color }}>Create task</Button>
       </Box>
     );
   }
 }
+
+CreateTaskField.contextType = ThemeContext;
