@@ -58,14 +58,16 @@ export class Task extends Component {
   }
 
   handleChangeStatus = () => {
-    const { isDone } = this.state;
+    const { isDone, status } = this.state;
 
-    this.setState((state) => {
-    return { 
-      status: state.status === 'active' ? 'done' : 'active', 
-      isDone: !state.isDone,
-      borderStyle: isDone ? '2px solid var(--main-color)' : 'none'
-    }});
+    if (status !== 'archive') {
+      this.setState((state) => {
+      return { 
+        status: state.status === 'active' ? 'done' : 'active', 
+        isDone: !state.isDone,
+        borderStyle: isDone ? '2px solid var(--main-color)' : 'none'
+      }});
+    }
   }
 
   componentDidUpdate(prevState) {

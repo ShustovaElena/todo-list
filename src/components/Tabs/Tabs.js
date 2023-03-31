@@ -3,12 +3,14 @@ import { ButtonGroup, Button } from '@mui/material';
 
 export class Tabs extends Component {
   render() {
+    const { showFiltredTasks } = this.props;
+
     return (
       <ButtonGroup variant="text" aria-label="text button group" sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Button>All</Button>
-        <Button>Active</Button>
-        <Button>Done</Button>
-        <Button>Archive</Button>
+        <Button onClick={() => showFiltredTasks('all')}>All</Button>
+        <Button onClick={() => showFiltredTasks('active')}>Active</Button>
+        <Button onClick={() => showFiltredTasks('done')}>Done</Button>
+        <Button onClick={() => showFiltredTasks('archive')}>Archive</Button>
       </ButtonGroup>
     );
   }
