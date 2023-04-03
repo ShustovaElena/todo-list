@@ -192,3 +192,7 @@ Task.propTypes = {
   editTask: PropTypes.func,
   deleteTask: PropTypes.func,
 }
+
+Task.defaultProps = {
+  deadline: ''
+};

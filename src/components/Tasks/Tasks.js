@@ -72,7 +72,6 @@ export class Tasks extends Component {
 
   showSearchTasks = (userInput) => {
     const { tasks } = this.state;
-    console.log('showSearchTasks');
 
     this.setState({filteredTasks: tasks.filter(task => task.title.toLowerCase().includes(userInput))});
   }
