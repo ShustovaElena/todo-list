@@ -5,6 +5,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import PropTypes from 'prop-types';
 
 export class Search extends Component {
+  debounceTimer = null;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -13,19 +15,19 @@ export class Search extends Component {
     }
   }
 
-  componentDidUpdate() {
-    const { userInput } = this.state;
-
-    if (userInput !== '') {
-      const { showSearchTasks } = this.props;
-      setTimeout(() => {
-        showSearchTasks(userInput);
-      }, 500);
-    }
+  handleChangeSearch = (event) => {
+    this.setState({userInput: event.target.value});
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(
+      this.getSearchTasks.bind(null, event.target.value), 
+      500
+    )
   }
 
-  handleChangeSearch = (event) => {
-    this.setState({ userInput: event.target.value });
+  getSearchTasks = (searchTerm) => {
+    const { showSearchTasks } = this.props;
+
+    showSearchTasks(searchTerm);
   }
 
   handleBlurSearch = () => {
@@ -52,6 +54,7 @@ export class Search extends Component {
         onChange={this.handleChangeSearch}
         onBlur={this.handleBlurSearch}
         value={userInput}
+        autoFocus 
       />
     );
   }
