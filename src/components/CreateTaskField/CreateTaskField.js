@@ -41,7 +41,7 @@ export class CreateTaskField extends Component {
       addTask({id, title, description, status});
     }
 
-    this.setState({ title: '', description: '' });
+    this.clear();
 
     event.preventDefault();
   }
