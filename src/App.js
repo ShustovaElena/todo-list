@@ -6,7 +6,7 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      theme: themes.light,
+      theme: themes.light
     };
 
     this.toggleTheme = () => {
@@ -23,8 +23,8 @@ export class App extends Component {
     return (
       <>
         <ThemeContext.Provider value={this.state.theme}>
-          <Header changeTheme={this.toggleTheme}/>
-          <Tasks />
+            <Header changeTheme={this.toggleTheme}/>
+            <Tasks />
         </ThemeContext.Provider>
       </>
     );

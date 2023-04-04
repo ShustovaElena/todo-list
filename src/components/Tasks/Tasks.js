@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Task, CreateTaskField, Tabs } from "../../components";
+import { Task, CreateTaskField, Tabs, Search } from "../../components";
 import { Container, Box } from '@mui/material';
 import { ThemeContext } from '../../context/ThemeContext';
 
@@ -70,12 +70,19 @@ export class Tasks extends Component {
     }
   }
 
+  showSearchTasks = (userInput) => {
+    const { tasks } = this.state;
+
+    this.setState({filteredTasks: tasks.filter(task => task.title.toLowerCase().includes(userInput))});
+  }
+
   render() {
     const { filteredTasks } = this.state;
     let theme = this.context;
 
     return (
       <Box sx={{ backgroundColor: theme.background, backgroundSize: '100%', minHeight: '100vh'}}>
+        <Search showSearchTasks={this.showSearchTasks}/>
         <CreateTaskField addTask={this.addTask}/>
         <Tabs showFiltredTasks={this.showFiltredTasks} />
         <Container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '50%' }}>

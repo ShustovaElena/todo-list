@@ -19,8 +19,8 @@ export class Task extends Component {
       description: this.props.description,
       deadline: this.props.deadline,
       status: this.props.status,
-      isDone: this.props.status === 'active' ? false : true,
-      isArchive: false,
+      isDone: this.props.status === 'done' ? true : false,
+      isArchive: this.props.status === 'archive' ? true : false,
       isError: false,
       isDeadline: false,
       borderStyle: this.props.status === 'done' ? '2px solid var(--main-color)' : 'none'
@@ -46,13 +46,9 @@ export class Task extends Component {
 
   handleChangeTitle = (event) => {
     if (event.target.value.length < 3) {
-      this.setState((state) => {
-        return { isError: true };
-      });
+      this.setState({ isError: true });
     } else {
-      this.setState((state) => {
-        return { isError: false };
-      });
+      this.setState({ isError: false });
     }
     this.setState({title: event.target.value});
   }
@@ -71,13 +67,9 @@ export class Task extends Component {
 
     if (!isError) {
       if (!this.state.isChangeTask) {
-        this.setState((state) => {
-          return {isChangeTask: true};
-        });
+        this.setState({isChangeTask: true});
       } else {
-        this.setState((state) => {
-          return {isChangeTask: false};
-        });
+        this.setState({isChangeTask: false});
       }
 
       if (parseInt((new Date(deadline) - new Date())/1000/60/60) < 24) {
@@ -86,7 +78,6 @@ export class Task extends Component {
         this.setState({ isDeadline: false });
       }
 
-  
       editTask({id, title, description, deadline, status});
     }
   }
@@ -98,7 +89,7 @@ export class Task extends Component {
       this.setState((state) => {
       return { 
         status: state.status === 'active' ? 'done' : 'active', 
-        isDone: !state.isDone,
+        isDone: state.isDone === true ? false : true,
         borderStyle: isDone ? '2px solid var(--main-color)' : 'none'
       }});
     }
@@ -106,6 +97,7 @@ export class Task extends Component {
 
   handleDeleteTask = () => {
     const { deleteTask, id } = this.props;
+
     deleteTask(id);
   }
 
@@ -116,7 +108,7 @@ export class Task extends Component {
       this.setState((state) => {
         return { 
           status: state.status === 'active' ? 'archive' : 'active',
-          isArchive: !state.isArchive
+          isArchive: state.isArchive === false ? true : false,
         }
       });
     }
@@ -192,3 +184,7 @@ Task.propTypes = {
   editTask: PropTypes.func,
   deleteTask: PropTypes.func,
 }
+
+Task.defaultProps = {
+  deadline: ''
+};

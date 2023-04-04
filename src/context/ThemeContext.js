@@ -7,7 +7,8 @@ export const themes = {
     background: '#ffffff',
     backgroundTask: '#ffffff',
     colorTask: '#3472e7',
-    colorDeadline: '#7f877e'
+    colorDeadline: '#7f877e',
+    colorSearch: '#403042'
   },
   dark: {
     color: '#ffffff',
@@ -15,7 +16,8 @@ export const themes = {
     background: '#b4b6c2',
     backgroundTask: '#474a51',
     colorTask: '#ffffff',
-    colorDeadline: '#ffffff'
+    colorDeadline: '#ffffff',
+    colorSearch: '#ffffff'
   },
 };
 
