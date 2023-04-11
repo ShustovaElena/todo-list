@@ -134,12 +134,12 @@ export class Task extends Component {
             error={isError} 
             helperText={isError && 'Title must be more 2 letters'}
           /> : 
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="div" sx={{overflow: 'auto'}}>
             {title}
           </Typography>}
           {isChangeTask ? 
           <TextField label="description" variant="standard" value={description} onChange={this.handleChangeDescription} /> : 
-          <Typography color="text.secondary">
+          <Typography color="text.secondary" sx={{overflow: 'auto'}}>
             {description}
           </Typography>}
         </Container>
