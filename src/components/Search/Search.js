@@ -50,7 +50,8 @@ export class Search extends Component {
         }}
         variant="outlined"
         color="warning"
-        sx={{ position: 'absolute', top: '10px', right: '20px'}}
+        size="small"
+        sx={{ position: 'absolute', top: '15px', right: '20px', width: '20%'}}
         onChange={this.handleChangeSearch}
         onBlur={this.handleBlurSearch}
         value={userInput}
