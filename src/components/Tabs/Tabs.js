@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 export class Tabs extends Component {
   render() {
     const { showFiltredTasks } = this.props;
+    const tabsName = ['all', 'active', 'done', 'archive'];
 
     return (
       <ButtonGroup variant="text" sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Button onClick={() => showFiltredTasks('all')}>All</Button>
-        <Button onClick={() => showFiltredTasks('active')}>Active</Button>
-        <Button onClick={() => showFiltredTasks('done')}>Done</Button>
-        <Button onClick={() => showFiltredTasks('archive')}>Archive</Button>
+        {tabsName.map((tab, index) => {
+          return <Button key={index} onClick={() => showFiltredTasks(tab)}>{tab}</Button>;
+        })}
       </ButtonGroup>
     );
   }

@@ -3,6 +3,8 @@ import { Task, CreateTaskField, Tabs, Search } from "../../components";
 import { Container, Box } from '@mui/material';
 import { ThemeContext } from '../../context/ThemeContext';
 
+import './styles.css';
+
 export class Tasks extends Component {
   constructor() {
     super();
@@ -85,7 +87,7 @@ export class Tasks extends Component {
         <Search showSearchTasks={this.showSearchTasks}/>
         <CreateTaskField addTask={this.addTask}/>
         <Tabs showFiltredTasks={this.showFiltredTasks} />
-        <Container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '50%' }}>
+        <Container className="tasks-container" sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '40%' }}>
           {filteredTasks && filteredTasks.map((task) => {
             return <Task key={task.id} {...task} editTask={this.editTask} deleteTask={this.deleteTask} />
           })}
